@@ -58,3 +58,5 @@ class Event (BaseModel):
     location: str
     title: str
     owner: List[Owner]
+
+
