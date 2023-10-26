@@ -1,20 +1,21 @@
 from pydantic import BaseModel
-from enum import Enum
+from enum import Enum, IntEnum
 from typing import List, Optional
 from datetime import time, datetime, date
 
-class DaysofWeek (Enum):
-    sunday = 0
-    monday = 1
-    tuesday = 2
-    wednesday = 3
-    thursday = 4
-    friday = 5
-    saturday = 6
+class DaysofWeek (IntEnum):
+    monday = 0
+    tuesday = 1
+    wednesday = 2
+    thursday = 3
+    friday = 4
+    saturday = 5
+    sunday = 6
 
 class ExclusionReasons (Enum):
     national_holiday = 0
     holiday_weekend = 1
+    birthday = 2
 
 class Recurrence (Enum):
     daily = 0
@@ -43,14 +44,9 @@ class Whereabout (BaseModel):
 class Calendar (BaseModel):
     whereabouts: List[Whereabout]
 
-class Kind (Enum):
-    holiday = 0
-    birthday = 1
-
 class Holiday (BaseModel):
-   
     name: str
-    kind: Kind
+    exclusion_reason: ExclusionReasons
     date: date
 
 class Event (BaseModel):
